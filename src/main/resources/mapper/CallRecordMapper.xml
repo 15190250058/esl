@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xbstar.esl.dao.CallRecordMapper">
+  <resultMap id="BaseResultMap" type="com.xbstar.esl.domain.CallRecord">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="call_uuid" jdbcType="VARCHAR" property="callUuid" />
+    <result column="caller_id_name" jdbcType="VARCHAR" property="callerIdName" />
+    <result column="caller_id_number" jdbcType="VARCHAR" property="callerIdNumber" />
+    <result column="destination_number" jdbcType="VARCHAR" property="destinationNumber" />
+    <result column="start_stamp" jdbcType="TIMESTAMP" property="startStamp" />
+    <result column="answer_stamp" jdbcType="TIMESTAMP" property="answerStamp" />
+    <result column="end_stamp" jdbcType="TIMESTAMP" property="endStamp" />
+    <result column="uduration" jdbcType="BIGINT" property="uduration" />
+    <result column="billsec" jdbcType="INTEGER" property="billsec" />
+    <result column="hangup_cause" jdbcType="VARCHAR" property="hangupCause" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, call_uuid, caller_id_name, caller_id_number, destination_number, start_stamp, 
+    answer_stamp, end_stamp, uduration, billsec, hangup_cause
+  </sql>
+  <select id="findByuuid" parameterType="String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from call_record
+    where call_uuid = #{callUuid,jdbcType=VARCHAR}
+  </select>
+</mapper>
